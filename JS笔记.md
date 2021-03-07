@@ -3,7 +3,7 @@
  * @Author       : Seulf
  * @Date         : 2021-02-22 19:15:15
  * @LastEditors  : Seulf
- * @LastEditTime : 2021-03-06 12:10:38
+ * @LastEditTime : 2021-03-07 00:53:10
 -->
 
 # JS笔记
@@ -1149,6 +1149,30 @@ var reg = /[^abc]/;
 var reg = /^ab/;
 ```
 
+#### 出现次数
+
+使用{number}来表示前一个匹配项出现个数, 如:
+
+``` javascript
+var reg = /ab{3}/;
+reg = /(ab){3}/;
+```
+
+使用{number1, number2}表示出现number1到number2次, number1默认值为0, number2默认值为无穷大, 如:
+
+``` javascript
+var reg = /ab{1,3}/;
+reg = /ab{3,}/;
+```
+
++表示至少一个, *表示任意(也没有都可以), ? 表示0个或1个, 如:
+
+``` javascript
+var reg = /ab*c/;
+reg = /ab+c/;
+reg = /ab?c/;
+```
+
 #### 组合应用
 
 以上语法可以任意匹配使用, 如:
@@ -1194,6 +1218,20 @@ str.match(/[a-z]/ig); //return: ['A','b','c','d']
 var str = 'abc123';
 str.replace(/[a-z]/ig, '@_@'); //return: @_@@_@@_@123
 ```
+
+#### ^和$组合使用
+
+使用^和$括起来表示完全匹配正则表达式的内容, 也即不能有多余内容, 如:
+
+``` javascript
+var str = '13855626252';
+var reg = /^1[3-9][1-9]{8}$/;
+reg.test(str);
+```
+
+### 常用符号
+
+见[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
 
 ## 附录知识点
 
