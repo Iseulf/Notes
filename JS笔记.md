@@ -3,7 +3,7 @@
  * @Author       : Seulf
  * @Date         : 2021-02-22 19:15:15
  * @LastEditors  : Seulf
- * @LastEditTime : 2021-03-07 00:53:10
+ * @LastEditTime : 2021-03-14 16:37:45
 -->
 
 # JS笔记
@@ -22,15 +22,11 @@
 
 2. 和css一样, js也可以写在标签属性里面.css用的是`style`属性, 而js用的则是`onclick`属性, 如:
 
-   
-
 ``` html
    <button onclick="alert('Hello');"></button>
 ```
 
 3. 而如果是a标签则可以写在`href`标签中, 如:
-
-   
 
 ``` html
    <a href="javascript:alert('Hello');"></a>
@@ -38,13 +34,9 @@
 
 4. <span style="color:red">推荐使用</span>: 写在外部文件中, 利用script标签的`src`属性来链接, 如:
 
-   
-
 ``` javascript
-   alert('Hello')
+   alert('Hello');
 ```
-
-   
 
 ``` html
    <script type="text/javascript" src="js/script.js">
@@ -848,13 +840,10 @@ func1(1, 2, 3);
 arguments对象是所有(非箭头)函数中都可用的**局部变量**. 你可以使用`
 arguments `对象在函数中引用函数的参数. 此对象包含传递给函数的每个参数, 第一个参数在索引0处. 例如, 如果一个函数传递了三个参数, 你可以以如下方式引用他们:
 
-``` 
-
-javascript
+``` javascript
 arguments[0]
 arguments[1]
 arguments[2]
-
 ```
 
 参数也可以进行设置:
@@ -1181,6 +1170,14 @@ reg = /ab?c/;
 var reg = /a[bde]c/; //表示匹配abc或adc或aec
 ```
 
+#### 例子
+
+匹配电子邮箱:
+
+``` javascript
+var reg = /^\w+.*\w*[A-z0-9]*(\.[A-z]{2,5}){1,2}/; // \w表示任意字母数字下划线
+```
+
 ### 3、正则表达式的用法
 
 #### split()
@@ -1219,6 +1216,12 @@ var str = 'abc123';
 str.replace(/[a-z]/ig, '@_@'); //return: @_@@_@@_@123
 ```
 
+去除开头和结尾的空格, 如:
+
+``` javascript
+var reg = /^\s*|\s*$/g;
+```
+
 #### ^和$组合使用
 
 使用^和$括起来表示完全匹配正则表达式的内容, 也即不能有多余内容, 如:
@@ -1232,6 +1235,55 @@ reg.test(str);
 ### 常用符号
 
 见[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+## 十一、DOM对象
+
+Document Object Model: 文档对象模型.
+
+### 1、节点Node
+
+大致分为四类:
+
+1. 文档节点：整个HTML文档
+2. 元素节点：HTML文档中的HTML标签
+3. 属性节点：元素的属性
+4. 文本节点：HTML标签的文本内容
+
+### 2、运用DOM对象操作网页元素
+
+JS为我们提供了一个原始DOM对象: 文档节点(document), 可以通过这个对象来找到网页的其他元素, 如:
+
+``` javascript
+var btn = document.getElementById("btn"); //假设HTML中有一个id为btn的元素
+var btn = document.getElementByClassName("btn");
+```
+
+找到对象之后就是操作对象: 直接设置对象属性值或者使用函数改变对象.
+
+### 3、和对象的事件绑定
+
+``` javascript
+var btn = document.getElementById("btn");
+btn.onclick = function() {
+    alert("Hello");
+} //btn按钮被点击即会弹出弹窗
+```
+
+### 4、书写位置
+
+注意这里的JS代码如正常写要写在他们需要的对象代码之后, 因为浏览器是从前往后执行, 想写在外面可以采用如下格式:
+
+``` javascript
+window.onload = function() {
+    var btn = document.getElementById("btn");
+    btn.innerHTML("bbtn");
+    btn.onclick = function() {
+        alert("Hello");
+    }
+}
+```
+
+### 5、
 
 ## 附录知识点
 
